@@ -12,3 +12,4 @@
 3. docker stack deploy -c docker-compose.yml hello_from_swarm
 4. go to http://localhost:5000
 5. To stop: docker stack rm hello_from_swarm
+6. To leave the swarm : docker swarm leave --force (use docker node ls to check )
