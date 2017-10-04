@@ -7,7 +7,7 @@
     (to pick up any code changes in hello.py)
 
 * Swarm Mode (with a single node a.k.a docker stack)
-1. cd swarm && docker swarm init
+1. cd swarm_single_node && docker swarm init
 2. docker build -t hello_swarm .
 3. docker stack deploy -c docker-compose.yml hello_from_swarm
 4. go to http://localhost:5000
