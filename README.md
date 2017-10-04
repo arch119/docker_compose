@@ -36,3 +36,19 @@ docker stack deploy -c docker-compose.yml hello_swarm
 9. Access the website at http://<ip add of myvm1 or myvm2>:5000
 10. CLeanup Swarm: 'docker stack rm hello_swarm'
 11. Cleanup VMs: 'docker-machine rm myvm1', 'docker-machine rm myvm2'
+
+# Stack (swarm mode with multi node and multi services). 
+    (Realized that this is Essentially the same as above with some more spice )
+1. As a preparation, ensure the local image named 'hello_swarm:latest' is pushed to docoker hub. Get the image id from 'docker images' and use a command like this to tag it
+docker tag d0bfe2e81195 docker.io/arch119shambhu/hello_swarm
+2. Now push it to docker hub - docker push arch119shambhu/hello_swarm:latest
+3. Create the VMs as before - run setup.sh and follow the instructions :
+    docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
+    docker-machine ssh myvm2 "docker swarm join --token SWMTKN-1-0eup0te8sujhbz5dw68ylqsylao81os4uwn8xpi3jyswtr9lci-58abhuf785k8ny6v4ffpjllvv 192.168.99.100:2377"
+    docker-machine ssh myvm1 "docker node ls"
+4. Make redis persistent
+docker-machine ssh myvm1 "mkdir ./data"
+5. Now start the stack - 
+    docker stack deploy -c docker-compose.yml hello_swarm
+6. Check the visualizer @ http://192.168.99.100:8080/ (the ip address could be of myvm1 or myvm2)
+7. Cleanup swarm ad vms
