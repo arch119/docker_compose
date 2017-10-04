@@ -14,7 +14,7 @@ redis = Redis(host='redis', port=6379)
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         count = redis.incr('hits')
-        self.write('Hello from Docker compose! I have been seen {} times.\n'.format(count))
+        self.write('Hello from Docker ! I have been seen {} times.\n'.format(count))
 
 def main():
     tornado.options.parse_command_line()
