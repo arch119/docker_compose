@@ -5,3 +5,10 @@
 4. To rebounce individual service, use docker start/stop.
     e.g. docker stop web && docker start web 
     (to pick up any code changes in hello.py)
+
+* Swarm Mode
+1. cd swarm && docker swarm init
+2. docker build -t hello_swarm .
+3. docker stack deploy -c docker-compose.yml hello_from_swarm
+4. go to http://localhost:5000
+5. To stop: docker stack rm hello_from_swarm
